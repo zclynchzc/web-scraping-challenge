@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1 style="display: flex; justify-content: center; align-items: center;">Mission to Mars</h1>
+            <p style="display: flex; justify-content: center; align-items: center;"><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1><strong>Latest Mars News</strong></h1>
+                    <h4><strong>{{ data.news_title }}</strong></h4>
+                    <p>{{ data.news_p }}</p>
+                    <h1><strong>Featured Image</strong></h1>
+                    <img width="100%" src="{{ data.featured_image_url }}" alt="featured_image">
+                </div>
+                <div class="col-md-4">
+                    <div class="card" class="card border-dark mb-3" style="padding: 16px;">
+                        <div class="card-body">
+                            <h4 class="card-title"><strong>Current Weather on Mars</strong></h4>
+                            <p class="card-text">{{ data.mars_weather }}</p>
+                        </div>
+                    </div>
+                    <h4><strong>Mars Facts</strong></h4>
+                    {{ data.mars_htmltable|safe }}
+                </div>
+            </div>
+        </div><br>
+        <div class="container">
+            <h2 style="display: flex; justify-content: center; align-items: center;"><strong>Mars Hemispheres</strong></h2>
+            <div class="row">
+                {% for h in data.hemisphere_image_urls %}
+                <div class="col-md-6">
+                    <div class="card">
+                        <img class="card-img-top" width="100%" src="{{ h.img_url }}" alt="{{ h.title }}">
+                        <h4 class="card-title" style="display: flex; justify-content: center; align-items: center;">{{ h.title }}</h4>
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
